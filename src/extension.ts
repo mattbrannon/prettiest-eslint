@@ -23,7 +23,6 @@ const supportedLanguages = [
 ];
 
 async function activate(context: vscode.ExtensionContext) {
-  Logger.show();
   for (const language of supportedLanguages) {
     const provider = vscode.languages.registerDocumentRangeFormattingEditProvider(language, {
       async provideDocumentRangeFormattingEdits(document: vscode.TextDocument): Promise<vscode.TextEdit[]> {
