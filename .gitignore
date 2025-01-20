@@ -1,0 +1,9 @@
+dist/
+build/
+node_modules/
+.vscode-test/
+*.vsix
+blah.js
+scratch.md
+contributes.json
+.DS_Store

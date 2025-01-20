@@ -1,0 +1,14 @@
+.gitignore
+.vscode/**
+.vscode-test/**
+**/.vscode-test.*
+src/**
+**/*.json
+**/*.map
+**/*.ts
+**/*.js.map
+**/*.config.*
+compiled/**
+node_modules/**
+configs/**
+scratch.md

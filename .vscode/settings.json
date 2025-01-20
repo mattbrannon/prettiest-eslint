@@ -1,0 +1,26 @@
+{
+  "files.exclude": {
+    "dist": false // set this to true to hide the "dist" folder with the compiled JS files,
+  },
+  "search.exclude": {
+    "dist": false // set this to false to include "dist" folder in search results
+  },
+  // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
+  "typescript.tsc.autoDetect": "off",
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange",
+  "editor.defaultFormatter": "mattbrannon.prettiest-eslint",
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "editor.codeActionsOnSave": {
+    "source.sortImports": "explicit",
+    "source.addMissingImports.ts": "explicit",
+    "source.organizeImports": "explicit"
+  }
+
+  // "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll.eslint": "explicit"
+  // },
+}

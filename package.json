@@ -1,0 +1,88 @@
+{
+  "name": "prettiest-eslint",
+  "displayName": "Prettiest ESLint",
+  "description": "A code formatter for opinionated developers",
+  "publisher": "mattbrannon",
+  "author": {
+    "name": "Matt Brannon",
+    "email": "mattbrannon.dev@gmail.com"
+  },
+  "license": "MIT",
+  "version": "0.0.1",
+  "keywords": [
+    "prettier",
+    "eslint",
+    "prettier-eslint",
+    "format",
+    "formatter",
+    "beautify",
+    "beautifier",
+    "style",
+    "lint",
+    "linter",
+    "code",
+    "vscode",
+    "extension",
+    "plugin"
+  ],
+  "engines": {
+    "vscode": "^1.91.0"
+  },
+  "categories": [
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onLanguage:css",
+    "onLanguage:graphql",
+    "onLanguage:html",
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:json",
+    "onLanguage:jsonc",
+    "onLanguage:less",
+    "onLanguage:markdown",
+    "onLanguage:mdx",
+    "onLanguage:scss",
+    "onLanguage:svelte",
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact",
+    "onLanguage:vue",
+    "onLanguage:yaml",
+    "onStartupFinished"
+  ],
+  "prettier": {
+    "printWidth": 110
+  },
+  "main": "./dist/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mattbrannon/prettiest-eslint"
+  },
+  "icon": "./images/icon.png",
+  "contributes": {},
+  "scripts": {
+    "clean": "rimraf ./dist ./compiled",
+    "compile": "tsc -p ./tsconfig.json --outDir ./compiled",
+    "watch": "tsc -watch -p ./tsconfig.json",
+    "lint": "eslint ./src --fix",
+    "test": "vscode-test --config ./configs/test.config.js",
+    "esbuild": "node ./configs/esbuild.config.js --production",
+    "package": "vsce package",
+    "build": "npm run clean && npm run lint && npm run compile && npm run esbuild && npm run test && vsce package && rimraf ./compiled"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.7.0",
+    "@types/eslint": "^8.56.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.91.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0",
+    "esbuild": "^0.24.2",
+    "eslint": "^9.17.0",
+    "globals": "^15.8.0",
+    "prettier": "^3.4.2",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^8.18.1"
+  }
+}
