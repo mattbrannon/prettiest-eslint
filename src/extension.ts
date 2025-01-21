@@ -37,7 +37,6 @@ async function activate(context: vscode.ExtensionContext) {
 }
 
 function deactivate(context: vscode.ExtensionContext) {
-  Logger.info(packageJson.displayName, 'deactivated');
   context.subscriptions.forEach((subscription) => subscription.dispose());
   Logger.dispose();
 }
