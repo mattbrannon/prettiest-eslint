@@ -78,11 +78,15 @@
     "@vscode/test-cli": "^0.0.9",
     "@vscode/test-electron": "^2.4.0",
     "esbuild": "^0.24.2",
-    "eslint": "^9.17.0",
+    "eslint": "*",
     "globals": "^15.8.0",
-    "prettier": "^3.4.2",
+    "prettier": "*",
     "rimraf": "^6.0.1",
     "typescript": "^5.4.5",
     "typescript-eslint": "^8.18.1"
+  },
+  "peerDependencies": {
+    "eslint": "^9.18.0",
+    "prettier": "^3.4.2"
   }
 }
