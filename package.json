@@ -1,6 +1,6 @@
 {
   "name": "prettiest-eslint",
-  "displayName": "Prettiest ESLint",
+  "displayName": "Prettiest ESLint Formatter",
   "description": "A code formatter for opinionated developers",
   "publisher": "mattbrannon",
   "author": {
