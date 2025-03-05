@@ -10,6 +10,10 @@ class DocumentFormatter {
   }
 
   static async formatDocument(document: vscode.TextDocument) {
+    if (!vscode.window.activeTextEditor) {
+      return [];
+    }
+
     Logger.clear();
     const prettierOutput = await new PrettierFormatter(document).formatDocument();
     const eslintOutput = await new ESLintFormatter(document).formatString(prettierOutput);
