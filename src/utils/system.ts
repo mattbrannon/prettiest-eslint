@@ -144,6 +144,10 @@ class System {
     }
     return undefined;
   }
+
+  static isInWorkspace(filepath: string) {
+    return filepath.startsWith(System.workspaceRoot);
+  }
 }
 
 export = System;
