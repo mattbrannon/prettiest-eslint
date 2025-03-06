@@ -2,25 +2,7 @@ import vscode = require('vscode');
 import Logger = require('./utils/logger');
 import DocumentFormatter = require('./formatter');
 import packageJson = require('../package.json');
-
-const supportedLanguages = [
-  'css',
-  'graphql',
-  'html',
-  'javascript',
-  'javascriptreact',
-  'json',
-  'jsonc',
-  'less',
-  'markdown',
-  'mdx',
-  'scss',
-  'svelte',
-  'typescript',
-  'typescriptreact',
-  'vue',
-  'yaml',
-];
+import supportedLanguages = require('./static');
 
 async function activate(context: vscode.ExtensionContext) {
   for (const language of supportedLanguages) {
@@ -37,7 +19,6 @@ async function activate(context: vscode.ExtensionContext) {
 }
 
 function deactivate(context: vscode.ExtensionContext) {
-  Logger.info(packageJson.displayName, 'deactivated');
   context.subscriptions.forEach((subscription) => subscription.dispose());
   Logger.dispose();
 }
