@@ -13,7 +13,7 @@ class Loader {
     const pathToModule = this.resolveModule(moduleName);
 
     try {
-      return this.requireModule(pathToModule, useCache);
+      return this.normalizeModuleExport(this.requireModule(pathToModule, useCache));
     }
     catch {
       return this.importModule(pathToModule, useCache);
@@ -36,10 +36,10 @@ class Loader {
 
     switch (true) {
       case isJson: {
-        return await this.parseJsonFile(pathToModule);
+        return this.normalizeModuleExport(await this.parseJsonFile(pathToModule));
       }
       default: {
-        return await this.dynamicImport(importPath);
+        return this.normalizeModuleExport(await this.dynamicImport(importPath));
       }
     }
   }
@@ -77,12 +77,28 @@ class Loader {
 
   private static async dynamicImport(pathToModule: string) {
     try {
-      const module = await import(pathToModule);
-      return module.default || module;
+      return await import(pathToModule);
     }
     catch (error) {
       throw new Error(`Error: Could not import module: ${pathToModule}`, { cause: error });
     }
+  }
+
+  private static normalizeModuleExport(module: unknown) {
+    let normalizedModule = module;
+    const visitedModules = new Set<unknown>();
+
+    while (
+      normalizedModule &&
+      typeof normalizedModule === 'object' &&
+      'default' in normalizedModule &&
+      !visitedModules.has(normalizedModule)
+    ) {
+      visitedModules.add(normalizedModule);
+      normalizedModule = (normalizedModule as { default: unknown }).default;
+    }
+
+    return normalizedModule;
   }
 
   private static normalizeFilePath(modulePath: string) {

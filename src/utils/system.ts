@@ -102,7 +102,17 @@ class System {
     return configPath;
   }
 
-  static getESLintConfigType(config: ESLintConfig) {
+  static getESLintConfigType(configPath: string, config: ESLintConfig) {
+    const configName = path.basename(configPath);
+
+    if (flatConfigs.includes(configName)) {
+      return ESLintConfigType.FLAT;
+    }
+
+    if (rcConfigs.includes(configName)) {
+      return ESLintConfigType.ESLINTRC;
+    }
+
     return Array.isArray(config) ? ESLintConfigType.FLAT : ESLintConfigType.ESLINTRC;
   }
 
@@ -113,7 +123,7 @@ class System {
   static async getESLintConfigData(filepath: string) {
     const configPath = System.getESLintConfigPath(filepath);
     const config = await System.getESLintConfig(configPath);
-    const configType = System.getESLintConfigType(config);
+    const configType = System.getESLintConfigType(configPath, config);
 
     // Cache.files.set(filepath, { configPath, configType });
     // Cache.eslintConfigs.set(configPath, config);

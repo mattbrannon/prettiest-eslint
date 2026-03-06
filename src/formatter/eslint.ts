@@ -59,10 +59,16 @@ class ESLintFormatter {
     return !Array.isArray(config) && isDefined((config as LegacyConfigWithParser).parser);
   }
 
-  static getESLintOptions(config: ESLintConfig, configPath: string, workspace: string): Options {
-    if (Array.isArray(config)) {
+  static getESLintOptions(
+    config: ESLintConfig,
+    configType: string,
+    configPath: string,
+    workspace: string,
+  ): Options {
+    if (configType === 'flat') {
       return { cwd: workspace, overrideConfig: config, overrideConfigFile: configPath } as FlatOptions;
     }
+
     return {
       cwd: workspace,
       overrideConfig: config,
@@ -74,7 +80,7 @@ class ESLintFormatter {
   static async getESLint(document: vscode.TextDocument) {
     const workspace = System.getDocumentWorkspace(document) || System.workspaceRoot;
     const { configType, config, configPath } = await System.getESLintConfigData(document.fileName);
-    const options = ESLintFormatter.getESLintOptions(config, configPath, workspace);
+    const options = ESLintFormatter.getESLintOptions(config, configType, configPath, workspace);
 
     const { loadESLint, Linter } = Resolver.eslint.require(document.fileName) as typeof ESLintNamespace;
     const ESLint = await loadESLint({ useFlatConfig: configType === 'flat' });
